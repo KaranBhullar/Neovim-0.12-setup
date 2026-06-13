@@ -33,14 +33,15 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<leader>lf", vim.lsp.buf.format, opts)
 	vim.keymap.set("n", "<leader>rn", function() vim.lsp.buf.rename() end, opts)
 	vim.keymap.set('n', '<leader>d', function() vim.diagnostic.open_float() end, opts)
-	vim.keymap.set('n', '<leader>]', function() vim.diagnostic.goto_next() end, opts)
-	vim.keymap.set('n', '<leader>[', function() vim.diagnostic.goto_prev() end, opts)
+	vim.keymap.set('n', '<leader>]', function() vim.diagnostic.jump({ count = 1 }) end, opts)
+	vim.keymap.set('n', '<leader>[', function() vim.diagnostic.jump({ count = -1 }) end, opts)
 end
 
 vim.lsp.config("djlsp", { on_attach = on_attach })
 vim.lsp.config("eslint", { on_attach = on_attach })
 vim.lsp.config("ts_ls", { on_attach = on_attach })
 vim.lsp.config("tailwindcss", { on_attach = on_attach })
+vim.lsp.config("ruby_lsp", { on_attach = on_attach, })
 
 vim.lsp.config("basedpyright", {
 	on_attach = on_attach,
@@ -56,10 +57,6 @@ vim.lsp.config("basedpyright", {
 	},
 })
 
-vim.lsp.config("emmet_ls", {
-	on_attach = on_attach,
-	filetypes = { "htmldjango", "djangohtml", "html" },
-})
 
 vim.lsp.config("lua_ls", { on_attach = on_attach })
 vim.diagnostic.config({
